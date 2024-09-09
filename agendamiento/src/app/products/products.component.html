@@ -1,1 +1,15 @@
-<p>products works!</p>
+<h2>Productos</h2>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <label for="name">Nombre del Producto:</label>
+  <input formControlName="name" placeholder="Ingrese el producto">
+  <button type="submit">{{ editMode ? 'Actualizar Producto' : 'Agregar Producto' }}</button>
+</form>
+
+<table>
+  <tr *ngFor="let product of products">
+    <td>{{ product.name }}</td>
+    <td><button (click)="onEdit(product)">Editar</button></td>
+    <td><button (click)="deleteProduct(product.id)">Borrar</button></td>
+  </tr>
+</table>

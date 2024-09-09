@@ -8,6 +8,8 @@ import { ProductsComponent } from './products/products.component';
 import { ReceptionCagesComponent } from './reception-cages/reception-cages.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
 import { ReceptionExecutionComponent } from './reception-execution/reception-execution.component';
+import { RootComponent } from './root/root.component';
+
 
 export const routes: Routes = [
   { path: 'providers', component: ProvidersComponent },
@@ -15,7 +17,7 @@ export const routes: Routes = [
   { path: 'reception-cages', component: ReceptionCagesComponent },
   { path: 'scheduling', component: SchedulingComponent },
   { path: 'reception-execution', component: ReceptionExecutionComponent },
-  { path: '', redirectTo: '/providers', pathMatch: 'full' }
+  { path: '', component: RootComponent }
 ];
 
 @NgModule({

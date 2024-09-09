@@ -1,1 +1,77 @@
-<p>scheduling works!</p>
+<h2>Reservas</h2>
+
+<form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+  <label for="fecha">Fecha:</label>
+  <input formControlName="fecha" type="date">
+
+  <label for="horaInicioAgendamiento">Hora Inicio Agendamiento:</label>
+  <select formControlName="horaInicioAgendamiento">
+    <option *ngFor="let time of predefinedTimes" [value]="time">{{ time }}</option>
+  </select>
+
+  <label for="horaFinAgendamiento">Hora Fin Agendamiento:</label>
+  <select formControlName="horaFinAgendamiento">
+    <option *ngFor="let time of predefinedTimes" [value]="time">{{ time }}</option>
+  </select>
+
+  <label for="idProveedor">Seleccionar Proveedor:</label>
+  <select formControlName="idProveedor">
+    <option *ngFor="let provider of providers" [value]="provider.id">{{ provider.name }}</option>
+  </select>
+
+  <label for="idJaula">Seleccionar Jaula:</label>
+  <select formControlName="idJaula">
+    <option *ngFor="let cage of cages" [value]="cage.id">{{ cage.name }}</option>
+  </select>
+
+  <h3>Productos</h3>
+  <div formArrayName="detalle">
+    <div *ngFor="let productGroup of detalleControls; let i = index" [formGroupName]="i">
+      <label for="idProducto">Producto:</label>
+      <select formControlName="idProducto">
+        <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+      </select>
+
+      <label for="cantidad">Cantidad:</label>
+      <input formControlName="cantidad" type="number" placeholder="Cantidad">
+    </div>
+  </div>
+  <button type="button" (click)="addProduct()">Agregar Producto</button>
+
+  <button type="submit">{{ editMode ? 'Actualizar Reserva' : 'Agregar Reserva' }}</button>
+</form>
+
+<h3>Reservas</h3>
+<table>
+  <thead>
+  <tr>
+    <th>Proveedor</th>
+    <th>Fecha</th>
+    <th>Hora Inicio</th>
+    <th>Hora Fin</th>
+    <th>Productos</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let appointment of appointments">
+    <td>{{ appointment.idProveedor }}</td>
+    <td>{{ appointment.fecha }}</td>
+    <td>{{ appointment.horaInicioAgendamiento }}</td>
+    <td>{{ appointment.horaFinAgendamiento }}</td>
+    <td>
+      <ul>
+        <li *ngFor="let detalle of appointment.detalle">
+          Producto: {{ getProductNameById(detalle.idProducto) }}, Cantidad: {{ detalle.cantidad }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <button (click)="onEdit(appointment)">Editar</button>
+      <button (click)="deleteAppointment(appointment.idTurno)">Borrar</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+

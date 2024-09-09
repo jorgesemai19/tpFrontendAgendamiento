@@ -1,1 +1,23 @@
-<p>reception-cages works!</p>
+<h2>Jaulas de Recepcion</h2>
+
+<form [formGroup]="cageForm" (ngSubmit)="onSubmit()">
+  <label for="name">Nombre de Jaula:</label>
+  <input formControlName="name" placeholder="Nombre de Jaula">
+
+  <label for="inUse">En uso:</label>
+  <select formControlName="inUse">
+    <option value="S">SI</option>
+    <option value="N">NO</option>
+  </select>
+
+  <button type="submit">{{ editMode ? 'Actualizar Jaula' : 'Agregar Jaula' }}</button>
+</form>
+
+<table>
+  <tr *ngFor="let cage of cages">
+    <td>{{ cage.name }}</td>
+    <td>{{ cage.inUse === 'S' ? 'Yes' : 'No' }}</td>
+    <td><button (click)="onEdit(cage)">Editar</button></td>
+    <td><button (click)="deleteCage(cage.id)">Borrar</button></td>
+  </tr>
+</table>

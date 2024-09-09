@@ -1,1 +1,30 @@
-<p>reception-execution works!</p>
+<h2>Reception Execution</h2>
+
+<!-- Turnos List -->
+<table>
+  <thead>
+  <tr>
+    <th>Provider</th>
+    <th>Cage</th>
+    <th>Start Time</th>
+    <th>Products</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let turno of turnos">
+    <td>{{ turno.provider }}</td>
+    <td>{{ turno.cage }}</td>
+    <td>{{ turno.startTime }}</td>
+    <td>
+      <ul>
+        <li *ngFor="let product of turno.products">{{ product.name }} - {{ product.quantity }}</li>
+      </ul>
+    </td>
+    <td>
+      <button (click)="startReception(turno)" [disabled]="turno.receptionStart">Start Reception</button>
+      <button (click)="endReception(turno)" [disabled]="!turno.receptionStart || turno.receptionEnd">End Reception</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

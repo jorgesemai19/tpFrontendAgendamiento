@@ -1,1 +1,15 @@
-<p>providers works!</p>
+<h2>Proveedores</h2>
+
+<form [formGroup]="providerForm" (ngSubmit)="onSubmit()">
+  <label for="name">Nombre del proveedor:</label>
+  <input formControlName="name" placeholder="Ingrese el nombre del proveedor">
+  <button type="submit">{{ editMode ? 'Actualizar Proveedor' : 'Agregar Proveedor' }}</button>
+</form>
+
+<table>
+  <tr *ngFor="let provider of providers">
+    <td>{{ provider.name }}</td>
+    <td><button (click)="onEdit(provider)">Editar</button></td>
+    <td><button (click)="deleteProvider(provider.id)">Borrar</button></td>
+  </tr>
+</table>
